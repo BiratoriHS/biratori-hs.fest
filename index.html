@@ -307,6 +307,121 @@
   .timeline-desc { font-size: 0.85rem; color: var(--dark); margin-top: 3px; line-height: 1.6; }
   .timeline-note { display: inline-block; margin-top: 4px; font-size: 0.72rem; color: var(--red); background: var(--red-light); padding: 2px 10px; border-radius: 20px; }
 
+  /* ===== 学年カード ===== */
+  .grade-card {
+    background: linear-gradient(150deg, #2a0d0a 0%, #1a0606 100%);
+    border: 1.5px solid rgba(232,69,60,0.35);
+    border-radius: 20px;
+    padding: 36px 28px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+  }
+  .grade-card::before {
+    content: '🃏';
+    position: absolute;
+    font-size: 9rem;
+    bottom: -30px; right: -25px;
+    opacity: 0.06;
+    line-height: 1;
+    transform: rotate(-10deg);
+  }
+  .grade-card.photo::before { content: '📸'; opacity: 0.1; }
+
+  /* 2年：明るい夏デザイン */
+  .grade-card.summer {
+    background: linear-gradient(150deg, #7ac74f 0%, #b8e065 55%, #ffe066 100%);
+    border: 1.5px solid rgba(255,255,255,0.6);
+    box-shadow: 0 10px 40px rgba(122,199,79,0.35);
+  }
+  .grade-card.summer::before {
+    content: '📸';
+    opacity: 0.14;
+    bottom: -30px; right: -25px;
+    top: auto;
+    transform: rotate(-10deg);
+  }
+  .grade-card.summer .grade-genre { color: #2d7a1f; }
+  .grade-card.summer .grade-title {
+    color: #1e3a10;
+    text-shadow: 0 2px 8px rgba(255,255,255,0.5);
+  }
+  .grade-card.summer .grade-subtitle { color: #b8860b; }
+  .grade-card.summer .grade-text { color: #2a4015; }
+
+  /* 3年：フルーツポンチデザイン */
+  .grade-card.punch {
+    background: linear-gradient(150deg, #ff9eb5 0%, #ffd17a 45%, #8fd9c4 100%);
+    border: 1.5px solid rgba(255,255,255,0.65);
+    box-shadow: 0 10px 40px rgba(255,158,181,0.35);
+  }
+  .grade-card.punch::before {
+    content: '🍒';
+    opacity: 0.16;
+    bottom: -25px; right: -20px;
+    top: auto;
+    transform: rotate(-10deg);
+  }
+  .grade-card.punch .grade-genre { color: #d6336c; }
+  .grade-card.punch .grade-title {
+    color: #7a2540;
+    text-shadow: 0 2px 8px rgba(255,255,255,0.5);
+  }
+  .grade-card.punch .grade-subtitle { color: #c2410c; }
+  .grade-card.punch .grade-text { color: #5a2535; }
+  .grade-card-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .grade-badge {
+    display: inline-block;
+    background: var(--red);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 900;
+    padding: 6px 16px;
+    border-radius: 8px;
+    letter-spacing: 0.05em;
+  }
+  .grade-genre {
+    font-size: 0.78rem;
+    color: #f5a623;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .grade-title {
+    font-weight: 900;
+    font-size: clamp(1.2rem, 4vw, 1.6rem);
+    color: #fff;
+    line-height: 1.5;
+    margin-bottom: 18px;
+    text-shadow: 0 0 20px rgba(232,69,60,0.4);
+    position: relative;
+    z-index: 1;
+  }
+  .grade-text {
+    font-size: 0.86rem;
+    color: rgba(255,255,255,0.82);
+    line-height: 2;
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 1;
+  }
+  .grade-text:last-child { margin-bottom: 0; }
+  .grade-subtitle {
+    font-size: 0.82rem;
+    color: #f5a623;
+    font-weight: 600;
+    margin-bottom: 16px;
+    margin-top: -8px;
+    letter-spacing: 0.03em;
+    position: relative;
+    z-index: 1;
+  }
+
   /* ===== COMING SOON ===== */
   .coming-block {
     background: var(--red-light);
@@ -606,17 +721,29 @@
   }
 
   .ennichi-detail {
-    display: none;
-    margin-top: 12px;
+    max-height: 0;
+    overflow: hidden;
+    margin-top: 0;
     font-size: 0.78rem;
     color: rgba(255,255,255,0.85);
     line-height: 1.8;
     text-align: left;
-    border-top: 1px solid rgba(255,255,255,0.2);
-    padding-top: 10px;
+    border-top: 0px solid rgba(255,255,255,0.2);
+    padding-top: 0;
+    opacity: 0;
+    transition: max-height 0.7s cubic-bezier(0.25, 0.1, 0.25, 1),
+                opacity 0.6s ease 0.1s,
+                margin-top 0.7s cubic-bezier(0.25, 0.1, 0.25, 1),
+                padding-top 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
   }
   .ennichi-detail p { margin-bottom: 6px; }
-  .ennichi-card.open .ennichi-detail { display: block; }
+  .ennichi-card.open .ennichi-detail {
+    max-height: 500px;
+    opacity: 1;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+  }
   .ennichi-arrow {
     font-size: 0.65rem;
     color: rgba(255,255,255,0.5);
@@ -753,6 +880,94 @@
     line-height: 2.2;
   }
   footer strong { display: block; color: rgba(255,255,255,0.85); font-size: 0.95rem; margin-bottom: 4px; }
+
+  /* クラス紹介セクション */
+  .class-section {
+    padding: 80px 24px;
+    background: linear-gradient(160deg, #0d1a2e 0%, #16243d 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .class-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+  .class-label {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 300;
+    font-size: 0.68rem;
+    letter-spacing: 0.45em;
+    color: #d4a056;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .class-title {
+    font-weight: 900;
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
+    color: #fff;
+    margin-bottom: 8px;
+    text-align: center;
+    letter-spacing: 0.05em;
+  }
+  .class-title .gold { color: #e8c060; }
+  .class-divider {
+    width: 44px; height: 3px;
+    background: linear-gradient(to right, #e8c060, #e8453c);
+    border-radius: 2px;
+    margin: 0 auto 36px;
+  }
+  .class-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(232,192,96,0.25);
+    border-radius: 20px;
+    padding: 36px 28px;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+  }
+  .class-grade {
+    display: inline-block;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    font-weight: 600;
+    color: #0d1a2e;
+    background: linear-gradient(135deg, #e8c060, #d4a056);
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+  .class-illust {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .class-illust svg { filter: drop-shadow(0 4px 12px rgba(0,0,0,0.35)); }
+  .class-text {
+    font-size: 0.92rem;
+    line-height: 2;
+    color: rgba(255,255,255,0.9);
+    text-align: left;
+  }
+  .class-text .em {
+    color: #e8c060;
+    font-weight: 700;
+  }
+  .class-popcorn-line {
+    margin-top: 22px;
+    padding-top: 22px;
+    border-top: 1px dashed rgba(232,192,96,0.35);
+    font-size: 0.92rem;
+    line-height: 2;
+    color: rgba(255,255,255,0.9);
+    text-align: left;
+  }
+  .class-popcorn-line .em { color: #e8c060; font-weight: 700; }
+
 </style>
 </head>
 <body>
@@ -970,17 +1185,48 @@
   <p class="section-label">Program</p>
   <h2 class="section-title">各クラスの企画</h2>
   <div class="divider"></div>
-  <div class="coming-block">
-    <span class="coming-tag">Coming Soon</span>
-    <h3 class="coming-title">ただいま準備中です</h3>
-    <p class="coming-desc">
-      1年生・2年生・3年生、それぞれが<br>
-      最高の企画を鋭意準備中。<br>
-      お楽しみに！
-    </p>
-    <div class="coming-dots">
-      <span></span><span></span><span></span>
+
+  <!-- 1年生 -->
+  <div class="grade-card">
+    <div class="grade-card-head">
+      <span class="grade-badge">1年生</span>
+      <span class="grade-genre">🃏 カジノ × 🍿 ポップコーン</span>
     </div>
+    <h3 class="grade-title">小さな家</h3>
+    <p class="grade-text">
+      世の中は結局「ハッタリと度胸」です。合法的にみなさんの脳をバグらせる最高のゲームを持ってきました。賭け事が大好き、スリルを味わいたい、破滅の快感を味わいたい命知らずな皆さん、ぜひ来てください。テーブルでお待ちしています。
+    </p>
+    <p class="grade-text">
+      …そして脳がバグった後は、できたてポップコーンで回復を。塩・キャラメル・カレーの3種類で、あなたの正気を優しく取り戻します。
+    </p>
+  </div>
+
+  <!-- 2年生 -->
+  <div class="grade-card summer" style="margin-top:24px;">
+    <div class="grade-card-head">
+      <span class="grade-badge">2年生</span>
+      <span class="grade-genre">📸 フォトスポット</span>
+    </div>
+    <h3 class="grade-title">Youth in Bloom, Framed Forever</h3>
+    <p class="grade-subtitle">〜咲き誇る青春を永遠にフレームに収めて〜</p>
+    <p class="grade-text">
+      2年生はフォトスポットを作ります。この機会しかない思い出を、素敵な写真に収めてください。
+    </p>
+  </div>
+
+  <!-- 3年生 -->
+  <div class="grade-card punch" style="margin-top:24px;">
+    <div class="grade-card-head">
+      <span class="grade-badge">3年生</span>
+      <span class="grade-genre">🍹 フルーツポンチ</span>
+    </div>
+    <h3 class="grade-title">森の小さなフルーツポンチ屋さん</h3>
+    <p class="grade-text">
+      どんぐりを辿ってもつかないフルーツポンチ屋さん（そういう程です）。冷たい冷たい美味しい美味しいフルーツポンチを！
+    </p>
+    <p class="grade-text">
+      コーラ、サイダー、レモネード、紅茶からベースを選んでください！
+    </p>
   </div>
 </div>
 
@@ -1154,7 +1400,6 @@
   </div>
 </div>
 
-<div class="sep"></div>
 
 <div class="section">
   <p class="section-label">Access</p>
